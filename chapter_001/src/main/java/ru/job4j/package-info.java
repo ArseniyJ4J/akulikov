@@ -6,4 +6,4 @@
 * @since 1.0
 */
 
-package akulikov.chapter_001.src.main.java.ru.job4j;
+package ru.job4j;

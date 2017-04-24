@@ -1,4 +1,4 @@
-package akulikov.chapter_001.src.main.java.ru.job4j;
+package ru.job4j;
 /**
  * Class Класс для будущего выполнения арифметических вычислений +, -, /, */ ^/ и так далее.
  * @author akulikov
