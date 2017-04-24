@@ -6,11 +6,13 @@ package ru.job4j;
  * @version 1
  */
 public class Calculate {
-	public static void main(String[] args) {
-		System.out.println("Hello world!");
-	}
+
 	/**
 	* Пока вычислять нечего, поэтому ввел метод,
 	* который выводит на экран консоли предложение "Hello world!"
 	*/
+
+	public static void main(String[] args) {
+		System.out.println("Hello world!");
+	}
 }
