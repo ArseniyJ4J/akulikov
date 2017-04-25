@@ -1,4 +1,4 @@
-﻿package ru.job4j;
+package ru.job4j;
 
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
