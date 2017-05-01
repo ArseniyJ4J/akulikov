@@ -5,7 +5,7 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 /**
-* Test por Ppint.
+* Test for Point.
 *
 * @author Arseniy Kulikov (mailto:arsmail424@gmail.com)
 * @version 1.0
