@@ -15,7 +15,7 @@ public class BubbleSort {
 	int limit = array.length - 1;
 	for (int i1 = limit; i1 >= 1; i1--) {
 		int i;
-		for (i = 0; i < limit;  i++) {
+		for (i = 0; i < i1;  i++) {
 			int buffer;
 			if (array[i] > array[i + 1]) {
 				buffer = array[i];
