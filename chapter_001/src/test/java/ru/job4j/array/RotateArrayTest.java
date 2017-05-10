@@ -11,17 +11,17 @@ import static org.junit.Assert.assertThat;
 * @since 1.0
 */
 public class RotateArrayTest {
-//	/**
-//	* Test.
-//	*/
-//	@Test
-//	public void rotateArrayOnQuarterThree() {
-//		RotateArray ra = new RotateArray();
-//		int[][]array = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-//		int[][] resultArray = ra.rotate(array);
-//		int[][] expectArray = {{7, 4, 1}, {8, 5, 2}, {9, 6, 3}};
-//		assertThat(resultArray, is(expectArray));
-//	}
+	/**
+	* Test.
+	*/
+	@Test
+	public void rotateArrayOnQuarterThree() {
+		RotateArray ra = new RotateArray();
+		int[][]array = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+		int[][] resultArray = ra.rotate(array);
+		int[][] expectArray = {{7, 4, 1}, {8, 5, 2}, {9, 6, 3}};
+		assertThat(resultArray, is(expectArray));
+	}
 	/**
 	* Test.
 	*/

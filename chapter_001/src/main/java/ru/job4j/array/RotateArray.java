@@ -13,9 +13,9 @@ public class RotateArray {
 	*/
 	public int[][] rotate(int[][] array) {
 	int lim = array.length - 1;
-	int[][] buffer = new int[lim][lim];
-		for  (int i = 0; i < lim; i++) {
-			for (int j = 0; j < lim; j++) {
+	int[][] buffer = new int[array.length][array.length];
+		for  (int i = 0; i <= lim; i++) {
+			for (int j = 0; j <= lim; j++) {
 				buffer[j][lim - i] = array[i][j];
 			}
 		}
