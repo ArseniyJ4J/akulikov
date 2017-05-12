@@ -24,6 +24,7 @@ public class ArrayDuplicate {
 				array[e] = array[lim - z];
 				array[lim - z] = buffer;
 				z++;
+				e--;
 				}
 			}
 			}
