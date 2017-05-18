@@ -4,14 +4,14 @@ package ru.job4j;
  * @author akulikov
  * @since 24.04.2017
  * @version 1
-*/
+ */
 public class Calculate {
 
 	/**
-	* Пока вычислять нечего, поэтому ввел метод.
-	* который выводит на экран консоли предложение "Hello world!"
-	* @param args - аргументы из командной строки.
-	*/
+	 * Пока вычислять нечего, поэтому ввел метод.
+	 * который выводит на экран консоли предложение "Hello world!"
+	 * @param args - аргументы из командной строки.
+	 */
 
 	public static void main(String[] args) {
 		System.out.println("Hello world!");
