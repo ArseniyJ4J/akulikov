@@ -8,19 +8,24 @@ package ru.job4j.exam;
 public class Mix {
 
     public int[] mix(int[] a, int[] b) {
-        int[] mix = new int[a.length + b.length - 2];
-        int score = 0;
-        for (int i = 0; i < a.length; i++){
-            for (int j = 0; j < b.length; j++){
-                if (a[i] <= b[j]) {
-                 mix[score] = a[i];
-                 score++;
-                 i++;
-                 break;
+        int[] mix = new int[a.length + b.length];
+        int ascore = 0;
+        int bscore = 0;
+        for (int i = 0; i < mix.length; i++){
+            if (ascore < a.length && bscore < b.length) {
+                if (a[ascore] <= b[bscore]) {
+                  mix[i] = a[ascore];
+                  ascore++;
                 } else {
-                    mix[score] = b[j];
-                    score++;
+                    mix[i] = b[bscore];
+                    bscore++;
                 }
+            } else if (ascore < a.length) {
+                mix[i] = a[ascore];
+                ascore++;
+            } else {
+                mix[i] = b[bscore];
+                bscore++;
             }
         }
         return mix;
