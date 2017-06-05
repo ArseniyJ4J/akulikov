@@ -21,7 +21,7 @@ public class Tracker {
      * @return - возвращение.
      * @param item - заявка.
      */
-    public Item add (Item item) {
+    public Item add(Item item) {
         item.setId(String.valueOf(RN.nextInt()));
         this.items[position++] = item;
         return item;
