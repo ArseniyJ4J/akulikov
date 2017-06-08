@@ -12,32 +12,28 @@ public class Doctor extends Profession {
     String academicDegree;
     /**
      * Метод выписывающий пациента.
-     * @param patient - объект типа Patient (пациент).
      */
-    public void diacharge(Patient patient){
+    public void diacharge(){
     }
     /**
      * Метод постановки диагноза.
-     * @param patient - объект типа Patient (пациент).
      * @return - возврат значения.
      */
-    public Diagnoze diagnozeCase (Patient patient) {
+    public String diagnozeCase () {
         return null;
     }
     /**
      * Метод выписки рецепта.
-     * @param diagnoze - объект типа Diagnoze (диагноз).
      * @return - возврат значения.
      */
-    public Order toOrderMedication (Diagnoze diagnoze) {
+    public String toOrderMedication () {
         return null;
     }
     /**
      * Метод выписки заключения.
-     * @param diagnoze - объект типа Diagnoze (диагноз).
      * @return - возврат значения.
      */
-    public Medicate medicate (Diagnoze diagnoze) {
+    public String medicate () {
         return null;
     }
 

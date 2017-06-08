@@ -1,4 +1,5 @@
 package ru.job4j.profession;
+
 /** Class Teacher.
  * @author Arseniy Kulkiov
  * @since 05.06.2017
@@ -26,7 +27,7 @@ public class Teacher extends Profession {
      * @return - возврат значения.
      */
     public String verifyTask (Task task) {
-        return Task task;
+        return null;
     }
     /**
      * Метод оценки выполнения задания на два балла.

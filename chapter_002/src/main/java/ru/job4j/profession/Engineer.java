@@ -12,9 +12,8 @@ public class Engineer extends Profession {
     String projects;
     /**
      * Метод начала проекта.
-     * @param project - объект типа project (проект).
      */
-    public void startProject (Project project){
+    public void startProject (){
     }
     /**
      * Метод расчёта конструктивного элемента.
@@ -26,17 +25,15 @@ public class Engineer extends Profession {
     }
     /**
      * Метод проведения архитектурного надзора за проектом.
-     * @param project - объект типа project (проект).
      * @return - возврат значения.
      */
-    public void architecturalSupervision (Project project) {
+    public void architecturalSupervision () {
     }
     /**
      * Метод проведения инженерной оптимизации проекта.
-     * @param project - объект типа project (проект).
      * @return - возврат значения.
      */
-    public Project engineerOptimization (Project project) {
-        return project;
+    public String engineerOptimization () {
+        return null;
     }
 }
