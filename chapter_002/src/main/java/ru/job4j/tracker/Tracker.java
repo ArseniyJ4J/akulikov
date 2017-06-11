@@ -1,6 +1,6 @@
 package ru.job4j.tracker;
 
-import java.util.Random;
+import java.util.*;
 
 /** Class tracker.
  * @author Arseniy Kulkiov
@@ -37,9 +37,14 @@ public class Tracker {
      * Метод редактирования заявки.
      * @param item - заявка.
      */
-    public void update (Item item) {
+    public boolean update (Item item) {
+        boolean result = false;
         int i = this.indexFromId(item);
-        this.items[i] = item;
+        if (i != -1) {
+            this.items[i] = item;
+            result = true;
+        }
+        return result;
 
         //for (int i = 0; i != this.position; i++) {
         //    if (this.items[i] != null && this.items[i].getId.equals(item.getId)){
@@ -52,10 +57,15 @@ public class Tracker {
      * Метод удаления заявки.
      * @param item - заявка.
      */
-    public void delete (Item item) {
+    public boolean delete (Item item) {
+        boolean result = false;
         int i = this.indexFromId(item);
-        System.arraycopy(this.items, i + 1, this.items, i, this.position - i);
-        this.position--;
+        if (i != -1) {
+            System.arraycopy(this.items, i + 1, this.items, i, this.position - i);
+            this.position--;
+            result = true;
+        }
+        return result;
 
         //int i = this.indexFromId(item);
         //Item[] b = new Item[this.items.length];
@@ -88,6 +98,7 @@ public class Tracker {
                 index++;
             }
         }
+        result = Arrays.copyOf(result, index);
         return result;
     }
     /**
@@ -117,12 +128,13 @@ public class Tracker {
      * @return - возвращаемое значение.
      */
     public int indexFromId (Item item) {
-        int index;
-        for (index = 0; index < this.items.length; index++) {
+        int result = -1;
+        for (int index = 0; index < this.items.length - 1; index++) {
             if (this.items[index] != null && this.items[index].getId().equals(item.getId())){
+                result = index;
                 break;
             }
         }
-        return index;
+        return result;
     }
 }
