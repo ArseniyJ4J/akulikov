@@ -7,27 +7,50 @@ package ru.job4j.tracker;
  */
 
 public class StartUi {
+    /**
+     * ADD - добавление заявки.
+     */
     private static final String ADD = "0";
+    /**
+     * SHOW - показать все заявки.
+     */
     private static final String SHOW = "1";
+    /**
+     * EDIT - отредактировать заявку.
+     */
     private static final String EDIT = "2";
+    /**
+     * DELETE - удалить заявку.
+     */
     private static final String DELETE = "3";
+    /**
+     * FINDID - найти заявку по идентификационному номеру.
+     */
     private static final String FINDID = "4";
+    /**
+     * FINDNAME - найти заявку по имени.
+     */
     private static final String FINDNAME = "5";
+    /**
+     * EXIT - выход из программы.
+     */
     private static final String EXIT = "6";
-
+    /**
+     * Метод инициализатор метода main.
+     */
     public void init() {
 
         boolean menu = true;
         Tracker tracker = new Tracker();
 
         while (menu) {
-            System.out.println ("0. Add new Item");
-            System.out.println ("1. Show all items");
-            System.out.println ("2. Edit item");
-            System.out.println ("3. Delete item");
-            System.out.println ("4. Find item by Id");
-            System.out.println ("5. Find items by name");
-            System.out.println ("6. Exit program");
+            System.out.println("0. Add new Item");
+            System.out.println("1. Show all items");
+            System.out.println("2. Edit item");
+            System.out.println("3. Delete item");
+            System.out.println("4. Find item by Id");
+            System.out.println("5. Find items by name");
+            System.out.println("6. Exit program");
             ConsoleInput consInput = new ConsoleInput();
             String menuOption = consInput.ask("Select: ");
 
@@ -37,7 +60,7 @@ public class StartUi {
                 tracker.add(new Item(name, desc));
                 System.out.println("Successfully added.");
 
-            } else if (SHOW.equals(menuOption)){
+            } else if (SHOW.equals(menuOption)) {
                 Item[] items = tracker.findAll();
                 if (items.length == 0) {
                     System.out.println("The Tracker is empty.");
@@ -98,7 +121,10 @@ public class StartUi {
             }
         }
     }
-
+    /**
+     * Метод main.
+     * @param args - строки из консоли.
+     */
     public static void main(String[] args) {
         new StartUi().init();
 

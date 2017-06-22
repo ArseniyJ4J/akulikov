@@ -6,34 +6,29 @@ package ru.job4j.profession;
  */
 public class Doctor extends Profession {
     /**
-     * Объявление поля academicDegree  - учёная степень.
-     * @param academicDegree - учёная степень.
-     */
-    String academicDegree;
-    /**
      * Метод выписывающий пациента.
      */
-    public void diacharge(){
+    public void diacharge() {
     }
     /**
      * Метод постановки диагноза.
      * @return - возврат значения.
      */
-    public String diagnozeCase () {
+    public String diagnozeCase() {
         return null;
     }
     /**
      * Метод выписки рецепта.
      * @return - возврат значения.
      */
-    public String toOrderMedication () {
+    public String toOrderMedication() {
         return null;
     }
     /**
      * Метод выписки заключения.
      * @return - возврат значения.
      */
-    public String medicate () {
+    public String medicate() {
         return null;
     }
 

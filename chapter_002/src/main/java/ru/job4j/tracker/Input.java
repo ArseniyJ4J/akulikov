@@ -5,5 +5,10 @@ package ru.job4j.tracker;
  * @version 1
  */
 public interface Input {
-    String ask (String question);
+    /**
+     * Метод вопрос - ответ.
+     * @param question - вопрос.
+     * @return - возврат значения.
+     */
+    String ask(String question);
 }

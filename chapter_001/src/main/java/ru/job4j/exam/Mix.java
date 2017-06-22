@@ -6,12 +6,17 @@ package ru.job4j.exam;
  * @version 1
  */
 public class Mix {
-
+    /**
+     * Метод.
+     * @return - возвращение.
+     * @param a - заявка.
+     * @param b - заявка.
+     */
     public int[] mix(int[] a, int[] b) {
         int[] mix = new int[a.length + b.length];
         int ascore = 0;
         int bscore = 0;
-        for (int i = 0; i < mix.length; i++){
+        for (int i = 0; i < mix.length; i++) {
             if (ascore < a.length && bscore < b.length) {
                 if (a[ascore] <= b[bscore]) {
                   mix[i] = a[ascore];

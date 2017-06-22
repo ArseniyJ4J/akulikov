@@ -6,34 +6,28 @@ package ru.job4j.profession;
  */
 public class Engineer extends Profession {
     /**
-     * Объявление поля project  - завершенные проекты.
-     * @param projects - завершенные проекты.
-     */
-    String projects;
-    /**
      * Метод начала проекта.
      */
-    public void startProject (){
+    public void startProject() {
     }
     /**
      * Метод расчёта конструктивного элемента.
      * @param beam - параметр конструктивного элемента.
      * @return - возврат значения.
      */
-    public int structuralCulculation (int beam) {
+    public int structuralCulculation(int beam) {
         return beam;
     }
     /**
      * Метод проведения архитектурного надзора за проектом.
-     * @return - возврат значения.
      */
-    public void architecturalSupervision () {
+    public void architecturalSupervision() {
     }
     /**
      * Метод проведения инженерной оптимизации проекта.
      * @return - возврат значения.
      */
-    public String engineerOptimization () {
+    public String engineerOptimization() {
         return null;
     }
 }

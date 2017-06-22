@@ -7,26 +7,21 @@ package ru.job4j.profession;
  */
 public class Teacher extends Profession {
     /**
-     * Объявление поля academicDegree  - учёная степень.
-     * @param academicDegree - учёная степень.
-     */
-    String academicDegree;
-    /**
      * Метод начала занятия.
      */
-    public void startLession(){
+    public void startLession() {
     }
     /**
      * Метод окончания занятия.
      */
-    public void finishLesson(){
+    public void finishLesson() {
     }
     /**
      * Метод проверки задания.
      * @param task - объект типа Assignment (задание).
      * @return - возврат значения.
      */
-    public String verifyTask (Task task) {
+    public String verifyTask(Task task) {
         return null;
     }
     /**
@@ -34,15 +29,14 @@ public class Teacher extends Profession {
      * @param task - объект типа Assignment (задание).
      * @return - возврат значения.
      */
-    public String rateTwoPoint (Task task) {
+    public String rateTwoPoint(Task task) {
         return "two ball";
     }
     /**
      * Метод проверки задания.
      * @param task - объект типа Assignment (задание).
-     * @return - возврат значения.
      */
-    public void exzamine (Task task) {
+    public void exzamine(Task task) {
     }
 
 }
