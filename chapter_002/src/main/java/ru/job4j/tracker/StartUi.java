@@ -36,24 +36,30 @@ public class StartUi {
      */
     private static final String EXIT = "6";
     /**
-     * EXIT - выход из программы.
+     * input - ввод.
      */
     private Input input;
-
-    public Tracker tracker;
-
+    /**
+     * tracker - трекер.
+     */
+    private Tracker tracker;
+    /**
+     * Конструктор.
+     * @param input - ввод.
+     * @param tracker - трекер.
+     */
     public StartUi(Input input, Tracker tracker) {
         this.tracker = tracker;
         this.input = input;
     }
-
-
+    /**
+     * Конструктор.
+     * @param input - ввод.
+     */
     public StartUi(Input input) {
         this.input = input;
     }
 
-    public StartUi(){
-    }
     /**
      * Метод инициализатор метода main.
      */

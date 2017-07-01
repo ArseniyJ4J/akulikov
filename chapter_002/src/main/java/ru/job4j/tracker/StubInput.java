@@ -7,11 +7,18 @@ package ru.job4j.tracker;
  */
 
 public class StubInput implements Input {
-
+    /**
+     * Массив ответов.
+     */
     private String[] answers;
-
-    int position = 0;
-
+    /**
+     * Счетчик положения в меню.
+     */
+    private int position = 0;
+    /**
+     * Метод.
+     * @param answers - ответы
+     */
     public StubInput(String[] answers) {
         this.answers = answers;
     }
