@@ -11,4 +11,11 @@ public interface Input {
      * @return - возврат значения.
      */
     String ask(String question);
+    /**
+     * Метод вопрос - ответ.
+     * @param question - вопрос.
+     * @param range - массив с диапазоном возможных вариантов выбора меню.
+     * @return - возврат значения.
+     */
+    int ask(String question, int[] range);
 }

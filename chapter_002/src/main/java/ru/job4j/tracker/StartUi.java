@@ -1,7 +1,5 @@
 package ru.job4j.tracker;
 
-import static java.lang.Integer.parseInt;
-
 /** Class Класс StartUI.
  * @author Arseniy Kulkiov
  * @since 20.06.2017
@@ -9,6 +7,10 @@ import static java.lang.Integer.parseInt;
  */
 
 public class StartUi {
+    /**
+     * @param ranges - массив с диапазоном возможных вариантов выбора меню.
+     */
+    private int[] ranges = new int[7];
     /**
      * input - ввод.
      */
@@ -39,13 +41,17 @@ public class StartUi {
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         menu.fillAction();
+        for (int i = 0; i < menu.getActions().length; i++) {
+            ranges[i] = menu.getActions()[i].key();
+        }
         do {
             menu.show();
-            int key = parseInt(input.ask("Select:"));
-            if (key == 6) {
+            int call = input.ask("Select: ", ranges);
+            if (call == 6) {
                 break;
+            } else {
+                menu.select(call);
             }
-            menu.select(key);
         } while (!"y".equals(this.input.ask("Exit?(y/n): ")));
     }
     /**
@@ -53,7 +59,7 @@ public class StartUi {
      * @param args - строки из консоли.
      */
     public static void main(String[] args) {
-        Input input = new ConsoleInput();
+        Input input = new ValidateInput();
         new StartUi(input).init();
 
     }

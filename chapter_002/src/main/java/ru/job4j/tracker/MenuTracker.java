@@ -41,6 +41,13 @@ public class MenuTracker {
         this.actions[6] = this.new Exit();
     }
     /**
+     * Метод геттер поля actions.
+     * @return - возврат actions.
+     */
+    public UserAction[] getActions() {
+        return this.actions;
+    }
+    /**
      * Метод ввода выбора "ключа" пункта меню.
      * @param key - "ключ"/номер пункта меню.
      */
@@ -257,7 +264,7 @@ public class MenuTracker {
          * @return - возврат.
          */
         public String info() {
-            return String.format("%s. %s", this.key(), "Find item(s) bu name.");
+            return String.format("%s. %s", this.key(), "Find item(s) by name.");
         }
     }
     /**
@@ -277,6 +284,7 @@ public class MenuTracker {
          * @param tracker - трекер.
          */
         public void execute(Input input, Tracker tracker) {
+
         }
         /**
          * Метод возвращающий строку для отображения в меню.
