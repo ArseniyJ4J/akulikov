@@ -32,13 +32,13 @@ public class MenuTracker {
      * Метод заполнения массива действий соответствующими методами.
      */
     public void fillAction() {
-        this.actions[0] = new AddItem();
-        this.actions[1] = new MenuTracker.ShowItems();
-        this.actions[2] = this.new EditItem();
-        this.actions[3] = this.new DeleteItem();
-        this.actions[4] = this.new FindById();
-        this.actions[5] = this.new FindByName();
-        this.actions[6] = this.new Exit();
+        this.actions[0] = new AddItem(0, "Add Item.");
+        this.actions[1] = new MenuTracker.ShowItems(1, "Show all items.");
+        this.actions[2] = this.new EditItem(2, "Edit item.");
+        this.actions[3] = this.new DeleteItem(3, "Delete item.");
+        this.actions[4] = this.new FindById(4, "Find item by Id.");
+        this.actions[5] = this.new FindByName(5, "Find item(s) by name.");
+        this.actions[6] = this.new Exit(6, "Exit.");
     }
     /**
      * Метод геттер поля actions.
@@ -65,7 +65,15 @@ public class MenuTracker {
     /**
      * внутренний внешний нестатический класс добавления заявки.
      */
-    class AddItem implements UserAction {
+    class AddItem extends BaseAction {
+        /**
+         * Конструктор.
+         * @param key - ключ действия.
+         * @param name - имя действия.
+         */
+        AddItem(int key, String name) {
+            super(key, name);
+        }
         /**
          * Метод возврата значения ключа.
          * @return - возврат.
@@ -84,18 +92,19 @@ public class MenuTracker {
             tracker.add(new Item(name, desc));
             System.out.println("Successfully added.");
         }
-        /**
-         * Метод возвращающий строку для отображения в меню.
-         * @return - возврат.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Add the new item.");
-        }
     }
     /**
      * Внутренний статический класс отображения всех заявок.
      */
-    private static class ShowItems implements UserAction {
+    private static class ShowItems extends BaseAction {
+        /**
+         * Конструктор.
+         * @param key - ключ действия.
+         * @param name - имя действия.
+         */
+        ShowItems(int key, String name) {
+            super(key, name);
+        }
         /**
          * Метод возврата значения ключа.
          * @return - возврат.
@@ -119,18 +128,19 @@ public class MenuTracker {
                 }
             }
         }
-        /**
-         * Метод возвращающий строку для отображения в меню.
-         * @return - возврат.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Show all items.");
-        }
     }
     /**
      * Внутренний нестатический класс редактирования заявки.
      */
-    private class EditItem implements UserAction {
+    private class EditItem extends BaseAction {
+        /**
+         * Конструктор.
+         * @param key - ключ действия.
+         * @param name - имя действия.
+         */
+        EditItem(int key, String name) {
+            super(key, name);
+        }
         /**
          * Метод возврата значения ключа.
          * @return - возврат.
@@ -156,18 +166,19 @@ public class MenuTracker {
                 System.out.println("Unknown Item's Id! Please, enter correct Id.");
             }
         }
-        /**
-         * Метод возвращающий строку для отображения в меню.
-         * @return - возврат.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Edit item.");
-        }
     }
     /**
      * Внутренний нестатический класс удаления заявки.
      */
-    private class DeleteItem implements UserAction {
+    private class DeleteItem extends BaseAction {
+        /**
+         * Конструктор.
+         * @param key - ключ действия.
+         * @param name - имя действия.
+         */
+        DeleteItem(int key, String name) {
+            super(key, name);
+        }
         /**
          * Метод возврата значения ключа.
          * @return - возврат.
@@ -190,18 +201,19 @@ public class MenuTracker {
                 System.out.println("Unknown Item's Id! Please, enter correct Id.");
             }
         }
-        /**
-         * Метод возвращающий строку для отображения в меню.
-         * @return - возврат.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Delete item.");
-        }
     }
     /**
      * Внутренний нестатический класс поиска заявки по Id.
      */
-    private class FindById implements UserAction {
+    private class FindById extends BaseAction {
+        /**
+         * Конструктор.
+         * @param key - ключ действия.
+         * @param name - имя действия.
+         */
+        FindById(int key, String name) {
+            super(key, name);
+        }
         /**
          * Метод возврата значения ключа.
          * @return - возврат.
@@ -223,18 +235,19 @@ public class MenuTracker {
                 System.out.println("Unknown Item's Id! Please, enter correct Id.");
             }
         }
-        /**
-         * Метод возвращающий строку для отображения в меню.
-         * @return - возврат.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item by Id.");
-        }
     }
     /**
      * Внутренний нестатический класс поиска заявки по имени.
      */
-    private class FindByName implements UserAction {
+    private class FindByName extends BaseAction {
+        /**
+         * Конструктор.
+         * @param key - ключ действия.
+         * @param name - имя действия.
+         */
+        FindByName(int key, String name) {
+            super(key, name);
+        }
         /**
          * Метод возврата значения ключа.
          * @return - возврат.
@@ -259,18 +272,19 @@ public class MenuTracker {
                 System.out.println("No item(s) with such name.");
             }
         }
-        /**
-         * Метод возвращающий строку для отображения в меню.
-         * @return - возврат.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Find item(s) by name.");
-        }
     }
     /**
      * Внутренний нестатический класс выхода из программы.
      */
-    private class Exit implements UserAction {
+    private class Exit extends BaseAction {
+        /**
+         * Конструктор.
+         * @param key - ключ действия.
+         * @param name - имя действия.
+         */
+        Exit(int key, String name) {
+            super(key, name);
+        }
         /**
          * Метод возврата значения ключа.
          * @return - возврат.
@@ -284,14 +298,6 @@ public class MenuTracker {
          * @param tracker - трекер.
          */
         public void execute(Input input, Tracker tracker) {
-
-        }
-        /**
-         * Метод возвращающий строку для отображения в меню.
-         * @return - возврат.
-         */
-        public String info() {
-            return String.format("%s. %s", this.key(), "Exit.");
         }
     }
 }
