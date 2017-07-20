@@ -18,7 +18,7 @@ public class Bank {
      */
     static final double TIME_FINISH = 20;
     /**
-     * Метод возвращающий массив со всеми периодами посетителей.
+     * Метод возвращающий массив со значениями границ периодов.
      * @param mans - массив посетителей.
      * @return - возврат значения.
      */
@@ -50,7 +50,7 @@ public class Bank {
         return buffer;
     }
     /**
-     * Метод возвращающий массив в границами периодов посещений.
+     * Метод возвращающий массив с количеством посетителей в каждом ключевом периоде.
      * @param mans - массив посетителей.
      * @return - возврат значения.
      */
@@ -70,7 +70,7 @@ public class Bank {
     }
 
     /**
-     * Метод вывода на консоль периоды времени, когда в банке было максимальное количество посетителей.
+     * Метод определения и вывода на консоль периоды времени, когда в банке было максимальное количество посетителей.
      * @param man - массив посетителей.
      */
     public void outPut(Man[] man) {
@@ -82,7 +82,9 @@ public class Bank {
             for (int j = 1; j < result.length; j++) {
                 if (result[i] >= result[j]) {
                     index[i] = 1;
-                    max = (int) result[i - 1];
+                    if (result[i] > max) {
+                        max = (int) result[i];
+                    }
                 } else  {
                     index[i] = 0;
                     break;
@@ -97,5 +99,18 @@ public class Bank {
             }
         }
     }
-
+    /**
+    public static void main (String[] args) {
+        Man[] man = {
+                new Man(8, 12),
+                new Man(8, 13),
+                new Man(8, 11),
+                new Man(9, 11),
+                new Man(10, 12),
+                new Man(15, 20),
+        };
+        Bank bank = new Bank();
+        bank.outPut(man);
+    }
+     */
 }

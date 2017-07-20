@@ -8,8 +8,10 @@ import java.io.PrintStream;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-/**
- * Created by Ирина on 18.07.2017.
+/** Class Класс BankTest.
+ * @author Arseniy Kulkiov
+ * @since 20.07.2017
+ * @version 1
  */
 public class BankTest {
 
@@ -70,6 +72,28 @@ public class BankTest {
         bank.outPut(man);
         String output = out.toString();
         boolean expect = output.contains("Максимальное количество посетителей: 3 в период(ы) времени: 10.0 - 12.0; 12.0 - 13.0; 15.0 - 16.0; ");
+        assertThat(expect, is(true));
+    }
+
+    /**
+     * Test.
+     */
+    @Test
+    public void outPutTest2() {
+        Man[] man = {
+                new Man(8, 12),
+                new Man(8, 13),
+                new Man(8, 11),
+                new Man(9, 11),
+                new Man(10, 12),
+                new Man(15, 20),
+        };
+        Bank bank = new Bank();
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        bank.outPut(man);
+        String output = out.toString();
+        boolean expect = output.contains("Максимальное количество посетителей: 5 в период(ы) времени: 10.0 - 11.0; ");
         assertThat(expect, is(true));
     }
 }
