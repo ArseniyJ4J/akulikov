@@ -42,4 +42,18 @@ public abstract class Figure {
      * @return - возврат.
      */
     public abstract Figure clone(Cell dist);
+
+    /**
+     * Метод проверяющий, что клетка cell находится в пределах шахматной доски.
+     * @param cell - проверяемая клетка.
+     * @return - возврат значения.
+     */
+    public boolean correctDiapasone(Cell cell) {
+        boolean result = false;
+        if (cell.getX() >= 1 && cell.getX() <= 8
+                && cell.getY() >= 1 && cell.getY() <= 8) {
+            result = true;
+        }
+        return result;
+    }
 }

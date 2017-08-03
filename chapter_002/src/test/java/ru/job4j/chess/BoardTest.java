@@ -2,6 +2,7 @@ package ru.job4j.chess;
 
 import org.junit.Test;
 import ru.job4j.chess.figures.Bishop;
+
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
@@ -13,10 +14,10 @@ import static org.junit.Assert.assertThat;
 public class BoardTest {
 
     /**
-     * Test.
+     * Test for move Bishop.
      */
     @Test
-    public void moveTest() {
+    public void moveTestBishop() {
         Board board = new Board();
         Cell source = new Cell(5, 4);
         Bishop bishop = new Bishop(source);
@@ -26,4 +27,5 @@ public class BoardTest {
         boolean bExpext = true;
         assertThat(bExpext, is(bResult));
     }
+
 }
