@@ -58,6 +58,20 @@ public class ConvertList {
         return array;
     }
     /**
+     * Метод возвращающий коллекция целых чисел, принимая коллекцию разноразмерных массивов целых чисел.
+     * @param list - коллекция разноразмерных массивов целых чисел.
+     * @return - возврат значения.
+     */
+    public List<Integer> convert(List<int[]> list) {
+        List<Integer> result = new LinkedList<Integer>();
+        for (int[] array : list) {
+            for (int value : array) {
+                result.add(value);
+            }
+        }
+        return result;
+    }
+    /**
      * Метод main.
      * @param args - массив строк командной строки.
      */
