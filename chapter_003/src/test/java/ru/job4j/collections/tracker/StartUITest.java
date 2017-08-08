@@ -61,7 +61,7 @@ public class StartUITest {
         Input input = new StubInput(new String[] {"3", item.getId(), "n", "6"});
         new StartUi(input, tracker).init();
         Item a = null;
-        Assert.assertThat(tracker.getItems().get(0), is(a));
+        Assert.assertThat(tracker.findById(item.getId()), is(a));
     }
     /**
      * Test edit method.

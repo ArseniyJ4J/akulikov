@@ -1,7 +1,9 @@
 package ru.job4j.collections.tracker;
 
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /** Class tracker.
  * @author Arseniy Kulkiov
@@ -46,7 +48,7 @@ public class Tracker {
      */
     public boolean update(Item item) {
         boolean result = false;
-        int i = this.items.indexOf(item);//this.indexFromId(item);
+        int i = this.items.indexOf(item);
         if (i != -1) {
             this.items.set(i, item);
             result = true;
@@ -61,7 +63,7 @@ public class Tracker {
      */
     public boolean delete(Item item) {
         boolean result = false;
-        int i = this.items.indexOf(item);//this.indexFromId(item);
+        int i = this.items.indexOf(item);
         if (i != -1) {
             this.items.remove(i);
             this.position--;

@@ -1,17 +1,52 @@
 package ru.job4j.collections.tracker;
+
+import java.util.Arrays;
+
 /** Class Класс заявки.
  * @author Arseniy Kulkiov
  * @since 07.06.2017
  * @version 1
  */
 public class Item {
+    @Override
+    public String toString() {
+        return "Item{"
+                + "id='" + id + '\''
+                + ", name='" + name + '\''
+                + ", desc='" + desc + '\''
+                + ", created=" + created
+                + ", comments=" + Arrays.toString(comments)
+                + '}';
+    }
+
     /**
      * id - идентификационный номер.
      */
     private String id;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Item item = (Item) o;
+
+        return id != null ? id.equals(item.id) : item.id == null;
+    }
+
+    @Override
+    public int hashCode() {
+        return id != null ? id.hashCode() : 0;
+    }
+
     /**
      * name - имя заявки.
      */
+
     private String name;
     /**
      * desc - описания заявки.

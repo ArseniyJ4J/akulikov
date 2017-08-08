@@ -37,9 +37,8 @@ public class TrackerTest {
         tracker.add(item);
         Item itemUpdate = new Item("itemUpdate", "Test for update method of TrackerTest", item.getId());
         tracker.update(itemUpdate);
-        List<Item> result = tracker.getItems();
         Item expect = itemUpdate;
-        assertThat(result.get(0), is(expect));
+        assertThat(tracker.findById(item.getId()), is(expect));
     }
     /**
      * Test update method.
@@ -63,9 +62,8 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.delete(item2);
-        List<Item> result = tracker.getItems();
         Item expect = null;
-        assertThat(result.get(1), is(expect));
+        assertThat(tracker.findById(item2.getId()), is(expect));
     }
     /**
      * Test delete method.
@@ -110,7 +108,7 @@ public class TrackerTest {
         tracker.add(item1);
         tracker.add(item2);
         tracker.add(item3);
-        List<Item>result = tracker.findByName("item1");
+        List<Item> result = tracker.findByName("item1");
         List<Item> expect = new ArrayList<>();
         expect.add(item2);
         expect.add(item3);
