@@ -22,15 +22,11 @@ public class SortUserTest {
      */
     @Test
     public void sortUserTest() {
-        User ivan = new User("Ivan", 21);
-        User oleg = new User("Oleg", 25);
-        User viktor = new User("Viktor", 19);
-        User sergey = new User("Sergey", 27);
         List<User> list = new LinkedList<>();
-        list.add(ivan);
-        list.add(oleg);
-        list.add(viktor);
-        list.add(sergey);
+        list.add(new User("Ivan", 21));
+        list.add(new User("Oleg", 25));
+        list.add(new User("Viktor", 19));
+        list.add(new User("Sergey", 27));
         SortUser su = new SortUser();
         Set<User> ts = su.sort(list);
         ByteArrayOutputStream out = new ByteArrayOutputStream();
