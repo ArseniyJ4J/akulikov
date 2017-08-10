@@ -21,7 +21,7 @@ public class SortUserTest {
      * Test for SortUser Class.
      */
     @Test
-    public void sortUserTest() {
+    public void sortUserAgeTest() {
         List<User> list = new LinkedList<>();
         list.add(new User("Ivan", 21));
         list.add(new User("Oleg", 25));
@@ -36,6 +36,46 @@ public class SortUserTest {
         }
         String expect = "19 21 25 27 ";
         assertThat(out.toString(), is(expect));
-
+    }
+    /**
+     * Test for SortUser Class.
+     */
+    @Test
+    public void sortUserNameLengthTest() {
+        List<User> list = new LinkedList<>();
+        list.add(new User("Archibald", 25));
+        list.add(new User("Aleksey", 19));
+        list.add(new User("Sergey", 27));
+        list.add(new User("Boris", 21));
+        SortUser su = new SortUser();
+        List<User> result = su.sortNameLength(list);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        for (User user : result) {
+            System.out.printf("%s ", user.getName());
+        }
+        String expect = "Boris Sergey Aleksey Archibald ";
+        assertThat(out.toString(), is(expect));
+    }
+    /**
+     * Test for SortUser Class.
+     */
+    @Test
+    public void sortUserByAllFieldsTest() {
+        List<User> list = new LinkedList<>();
+        list.add(new User("Archibald", 25));
+        list.add(new User("Aleksey", 19));
+        list.add(new User("Sergey", 27));
+        list.add(new User("Boris", 21));
+        list.add(new User("Aleksey", 27));
+        SortUser su = new SortUser();
+        List<User> result = su.sortByAllField(list);
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(out));
+        for (User user : result) {
+            System.out.printf("%s, %s; ", user.getName(), user.getAge());
+        }
+        String expect = "Aleksey, 19; Aleksey, 27; Archibald, 25; Boris, 21; Sergey, 27; ";
+        assertThat(out.toString(), is(expect));
     }
 }
