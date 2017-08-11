@@ -1,4 +1,4 @@
-package ru.job4j.collections.Sort;
+package ru.job4j.collections.sort;
 
 //import ru.job4j.collections.User;
 

@@ -1,4 +1,4 @@
-package ru.job4j.collections.Sort;
+package ru.job4j.collections.sort;
 
 /** Class Класс User.
  * @author Arseniy Kulkiov

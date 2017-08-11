@@ -2,7 +2,7 @@ package ru.job4j.Bank;
 
 import java.util.Arrays;
 
-/** Класс Bank.
+/** Класс bank.
  * @author Arseniy Kulkiov
  * @since 18.07.2017
  * @version 1
@@ -109,7 +109,7 @@ public class Bank {
                 new Man(10, 12),
                 new Man(15, 20),
         };
-        Bank bank = new Bank();
+        bank bank = new bank();
         bank.outPut(man);
     }
      */
