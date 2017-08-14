@@ -5,9 +5,10 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-
-/**
- * Created by Ирина on 11.08.2017.
+/** Class Класс SortBankTest.
+ * @author Arseniy Kulkiov
+ * @since 14.08.2017
+ * @version 1
  */
 public class StartBankTest {
     /**
