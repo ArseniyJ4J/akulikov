@@ -5,9 +5,13 @@ import org.junit.Test;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertThat;
-/**
- * Created by Ирина on 20.08.2017.
+
+/** Class SimpleArrayTest.
+ * @author Arseniy Kulkiov
+ * @since 21.08.2017
+ * @version 1
  */
+
 public class SimpleArrayTest {
     /**
      * Test.
