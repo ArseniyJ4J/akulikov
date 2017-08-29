@@ -15,7 +15,7 @@ public class SimpleLinkedList<E> implements Iterable {
     /**
      * Поле класса size - текущее количество элементов в контейнере.
      */
-    private int size;
+    private int size = 0;
 
     /**
      * Поле класса first - первый элемент контейнера.
@@ -66,13 +66,49 @@ public class SimpleLinkedList<E> implements Iterable {
      * @return - возврат значения.
      */
     public E get(int index) {
-        Node<E> target = this.first.getNext();
         if (index < size) {
+            Node<E> target = this.first.getNext();
             for (int i = 0; i < index; i++) {
                 target = target.getNext();
             }
+            return target.getItem();
+        } else {
+            throw new NoSuchElementException();
         }
-        return target.getItem();
+    }
+
+    /**
+     * Метод удаляющий и возвращающий элемент из контейнера.
+     * @param index - индекс элемента.
+     * @return - возврат значения.
+     */
+    public E delete(int index) {
+        if (index < size) {
+            E result = this.get(index);
+
+            Node<E> target = this.first.getNext();
+            for (int i = 0; i <= index; i++) {
+                if (index == 0) {
+                    Node<E> prev = target.getNext();
+                    this.first.setNext(prev);
+                    target.setNext(null);
+                    size--;
+                    break;
+                }
+                if (i >= index - 1) {
+                    Node<E> prev = target.getNext().getNext();
+                    target.getNext().setNext(null);
+                    target.setNext(prev);
+                    this.size--;
+                    break;
+                }  else {
+                    target = target.getNext();
+                }
+            }
+            return result;
+        } else {
+            throw new NoSuchElementException();
+        }
     }
 
     /**
@@ -171,9 +207,9 @@ public class SimpleLinkedList<E> implements Iterable {
         @Override
         public Object next() throws NoSuchElementException {
             if (hasNext()) {
-            return get(counter++);
-        } else {
-            throw new NoSuchElementException();
+                return get(counter++);
+            } else {
+                throw new NoSuchElementException();
             }
         }
     }
