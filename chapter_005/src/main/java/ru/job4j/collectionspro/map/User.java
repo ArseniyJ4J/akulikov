@@ -1,4 +1,4 @@
-package ru.job4j.collectionspro.Map;
+package ru.job4j.collectionspro.map;
 
 import java.util.Calendar;
 
