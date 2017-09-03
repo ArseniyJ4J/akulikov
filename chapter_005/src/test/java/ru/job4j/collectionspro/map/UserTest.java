@@ -59,6 +59,24 @@ public class UserTest {
         System.out.println(user1.hashCode());
         System.out.println(user2.hashCode());
         System.out.println(user1.equals(user2));
+        System.out.println(user1 == user2);
+    }
+
+    /**
+     * Test.
+     */
+    @Test
+    public void fourthUserOverrideHashCodeAndEqualsTest() {
+        UserOverrideHashAndEq user1 = new UserOverrideHashAndEq("Arseniy", 0, new GregorianCalendar(1989, 02,07));
+        UserOverrideHashAndEq user2 = new UserOverrideHashAndEq("Arseniy", 0, new GregorianCalendar(1989, 02,07));
+        Map<UserOverrideHashAndEq, Object> testMap = new HashMap<>();
+        testMap.put(user1, "Engineer");
+        testMap.put(user2, "Developer");
+        System.out.println(testMap);
+        System.out.println(user1.hashCode());
+        System.out.println(user2.hashCode());
+        System.out.println(user1.equals(user2));
+        System.out.println(user1 == user2);
     }
 
 }
