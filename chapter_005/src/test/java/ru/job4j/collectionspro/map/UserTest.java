@@ -45,4 +45,20 @@ public class UserTest {
         System.out.println(user2.hashCode());
     }
 
+    /**
+     * Test.
+     */
+    @Test
+    public void thirdUserOverrideEqualsTest() {
+        UserOverrideEquals user1 = new UserOverrideEquals("Arseniy", 0, new GregorianCalendar(1989, 02,07));
+        UserOverrideEquals user2 = new UserOverrideEquals("Arseniy", 0, new GregorianCalendar(1989, 02,07));
+        Map<UserOverrideEquals, Object> testMap = new HashMap<>();
+        testMap.put(user1, "Engineer");
+        testMap.put(user2, "Developer");
+        System.out.println(testMap);
+        System.out.println(user1.hashCode());
+        System.out.println(user2.hashCode());
+        System.out.println(user1.equals(user2));
+    }
+
 }
