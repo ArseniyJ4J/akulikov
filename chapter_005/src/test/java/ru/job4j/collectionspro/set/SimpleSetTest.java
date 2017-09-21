@@ -1,4 +1,4 @@
-package ru.job4j.collectionspro.Set;
+package ru.job4j.collectionspro.set;
 
 import org.junit.Test;
 

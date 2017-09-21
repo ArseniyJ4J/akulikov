@@ -1,28 +1,32 @@
-package ru.job4j.collectionspro.Set;
-
-import ru.job4j.collectionspro.list.SimpleLinkedList;
+package ru.job4j.collectionspro.set;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-/** Класс SimpleLinkedSet.
+/** Класс SimpleSet.
  * @author Arseniy Kulkiov
  * @since 31.08.2017
  * @version 1
  * @param <E> - параметризованный тип.
  */
 
-public class SimpleLinkedSet<E> implements Iterable<E> {
-    /**
-     * Поле класса container.
-     */
-    private SimpleLinkedList<E> container = new SimpleLinkedList<>();
+public class SimpleSet<E> implements Iterable<E> {
 
     /**
-     * Геттер для поля container.
+     * Поле класса.
+     */
+    private Object[] container = new Object[5];
+
+    /**
+     * Поле класса.
+     */
+    private int count = 0;
+
+    /**
+     * Геттер для поля класса container.
      * @return - возврат значения.
      */
-    public SimpleLinkedList<E> getContainer() {
+    public Object[] getContainer() {
         return container;
     }
 
@@ -31,15 +35,15 @@ public class SimpleLinkedSet<E> implements Iterable<E> {
      * @param e - добавляемый элемент.
      * @return - возврат значения.
      */
-    public boolean checkUniq(E e) {
-        boolean result = true;
-        for (int i = 0; i < this.container.getSize(); i++) {
-            if (this.container.get(i) == e) {
-                result = false;
+    private boolean checkUnique(E e) {
+        boolean result = false;
+        for (int i = 0; i < count; i++) {
+            if (result) {
                 break;
             }
+            result = this.container[i].equals(e);
         }
-        return result;
+        return !result;
     }
 
     /**
@@ -47,31 +51,34 @@ public class SimpleLinkedSet<E> implements Iterable<E> {
      * @param e - добавляемый элемент.
      */
     public void add(E e) {
-        if (this.checkUniq(e)) {
-            this.container.add(e);
+        if (count == container.length) {
+            int newSize = ((container.length * 3) / 2) + 1;
+            Object[] newContainer = new Object[newSize];
+            System.arraycopy(this.container, 0, newContainer, 0, container.length);
+            this.container = newContainer;
+        }
+        if (checkUnique(e)) {
+            container[count++] = e;
         }
     }
 
     /**
      * Returns an iterator over elements of type {@code T}.
-     *
      * @return an Iterator.
      */
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-
             private int point = 0;
-
             @Override
             public boolean hasNext() {
-                return this.point < container.getSize();
+                return count > this.point;
             }
 
             @Override
             public E next() {
-                if (this.point < container.getSize()) {
-                    return container.get(point++);
+                if (count > this.point) {
+                    return (E) container[this.point++];
                 } else {
                     throw new NoSuchElementException();
                 }

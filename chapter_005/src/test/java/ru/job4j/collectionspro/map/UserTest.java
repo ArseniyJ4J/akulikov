@@ -20,8 +20,8 @@ public class UserTest {
      */
     @Test
     public void firstUserTest() {
-        User user1 = new User("Arseniy", 0, new GregorianCalendar(1989, 02,07));
-        User user2 = new User("Arseniy", 0, new GregorianCalendar(1989, 02,07));
+        User user1 = new User("Arseniy", 0, new GregorianCalendar(1989, 02, 07));
+        User user2 = new User("Arseniy", 0, new GregorianCalendar(1989, 02, 07));
         Map<User, Object> testMap = new HashMap<>();
         testMap.put(user1, "Engineer");
         testMap.put(user2, "Developer");
@@ -35,8 +35,8 @@ public class UserTest {
      */
     @Test
     public void secondUserOverrideHashCodeTest() {
-        UserOverrideHashCode user1 = new UserOverrideHashCode("Arseniy", 0, new GregorianCalendar(1989, 02,07));
-        UserOverrideHashCode user2 = new UserOverrideHashCode("Arseniy", 0, new GregorianCalendar(1989, 02,07));
+        UserOverrideHashCode user1 = new UserOverrideHashCode("Arseniy", 0, new GregorianCalendar(1989, 02, 07));
+        UserOverrideHashCode user2 = new UserOverrideHashCode("Arseniy", 0, new GregorianCalendar(1989, 02, 07));
         Map<UserOverrideHashCode, Object> testMap = new HashMap<>();
         testMap.put(user1, "Engineer");
         testMap.put(user2, "Developer");
@@ -50,8 +50,8 @@ public class UserTest {
      */
     @Test
     public void thirdUserOverrideEqualsTest() {
-        UserOverrideEquals user1 = new UserOverrideEquals("Arseniy", 0, new GregorianCalendar(1989, 02,07));
-        UserOverrideEquals user2 = new UserOverrideEquals("Arseniy", 0, new GregorianCalendar(1989, 02,07));
+        UserOverrideEquals user1 = new UserOverrideEquals("Arseniy", 0, new GregorianCalendar(1989, 02, 07));
+        UserOverrideEquals user2 = new UserOverrideEquals("Arseniy", 0, new GregorianCalendar(1989, 02, 07));
         Map<UserOverrideEquals, Object> testMap = new HashMap<>();
         testMap.put(user1, "Engineer");
         testMap.put(user2, "Developer");
@@ -67,8 +67,8 @@ public class UserTest {
      */
     @Test
     public void fourthUserOverrideHashCodeAndEqualsTest() {
-        UserOverrideHashAndEq user1 = new UserOverrideHashAndEq("Arseniy", 0, new GregorianCalendar(1989, 02,07));
-        UserOverrideHashAndEq user2 = new UserOverrideHashAndEq("Arseniy", 0, new GregorianCalendar(1989, 02,07));
+        UserOverrideHashAndEq user1 = new UserOverrideHashAndEq("Arseniy", 0, new GregorianCalendar(1989, 02, 07));
+        UserOverrideHashAndEq user2 = new UserOverrideHashAndEq("Arseniy", 0, new GregorianCalendar(1989, 02, 07));
         Map<UserOverrideHashAndEq, Object> testMap = new HashMap<>();
         testMap.put(user1, "Engineer");
         testMap.put(user2, "Developer");

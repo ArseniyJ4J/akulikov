@@ -16,7 +16,7 @@ import java.util.TreeSet;
 
 public class SortUser  {
     /**
-     * Метод возвращающий Set объектов User отсоритрованных по возрастанию поля age.
+     * Метод возвращающий set объектов User отсоритрованных по возрастанию поля age.
      * @param list - list неотсортированных объектов User
      * @return - возврат значения.
      */
