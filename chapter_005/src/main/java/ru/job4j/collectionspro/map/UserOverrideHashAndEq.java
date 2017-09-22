@@ -67,13 +67,21 @@ public class UserOverrideHashAndEq {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         UserOverrideHashAndEq that = (UserOverrideHashAndEq) o;
 
-        if (children != that.children) return false;
-        if (name != null ? !name.equals(that.name) : that.name != null) return false;
+        if (children != that.children) {
+            return false;
+        }
+        if (name != null ? !name.equals(that.name) : that.name != null) {
+            return false;
+        }
         return birthday != null ? birthday.equals(that.birthday) : that.birthday == null;
     }
 
