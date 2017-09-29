@@ -77,24 +77,24 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         boolean result = false;
         Node<E> newParent = new Node<>(parent);
         Node<E> newChild = new Node<>(child);
-        if (basis == null) {
+        if (this.basis == null) {
             if (parent.compareTo(child) == 0) {
 //                System.out.println("Parent compare Child!!!!!!");
                 result = false;
             } else {
-                basis = newParent;
-                basis.getChildren().add(newChild);
+                this.basis = newParent;
+                this.basis.getChildren().add(newChild);
 //                System.out.println("Root-parent added!");
 //                System.out.println("Check child: " + this.searchDuplicate(newChild));
                 result = true;
-                size++;
+                size += 2;
             }
         } else {
-            Node<E> point = this.searchParent(basis, this.basis);
+            Node<E> point = this.searchParent(newParent, this.basis);
             int check = -1;
             if (point != null) {
                 for (Node node : point.getChildren()) {
-                    check = child.compareTo((E) node.getValue());
+                    check = newChild.getValue().compareTo((E) node.getValue());
                     if (check == 0) {
 //                        System.out.println("Already have!!!");
 //                        System.out.println("Check child: " + this.searchDuplicate(newChild));
@@ -116,10 +116,12 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     /**
      * Метод определения дубликата.
      * @param value - проверяемое значение.
-     * @return - возврат значения.
+     * @return - возврат значения. Возвращает true, если элемент Node с таким значением уже есть в дереве.
      */
     private boolean searchDuplicate(Node value) {
+//        System.out.println("Duplicate search result: ===============");
         Node<E> result = this.searchParent(value, this.basis);
+//        System.out.println("====================");
         return result != null;
     }
 
@@ -131,30 +133,17 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      */
     private Node<E> searchParent(Node<E> parent, Node<E> first) {
         Node<E> result = null;
-        if (first.getValue().compareTo(parent.getValue()) == 0) {
+        int check = first.getValue().compareTo(parent.getValue());
+//        System.out.println(check);
+        if (check == 0) {
             result = first;
         } else {
             for (Node item  : first.getChildren()) {
-                this.searchParent(parent, item);
+                result = this.searchParent(parent, item);
                 if (result != null) {
                     break;
                 }
             }
-        }
-        return result;
-    }
-
-    /**
-     * Метод получения всех элементов дерева от опеределенного основания в виде списка.
-     * @param node - основание.
-     * @return - возврат значения.
-     */
-    private List<Node<E>> getAllChildren(Node<E> node) {
-        List<Node<E>> result = new ArrayList<>();
-        result.add(node);
-        for (Node value : node.getChildren()) {
-            result.add(value);
-            this.getAllChildren(value);
         }
         return result;
     }
@@ -166,17 +155,39 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     @Override
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private List<Node<E>> result = getAllChildren(basis);
+
+
+            private List<E> result = new ArrayList<>();
             private int it = 0;
+            private boolean check = true;
+
+
+            private void getAllElements(Node<E> node) {
+                if (this.check) {
+                    result.add(basis.getValue());
+                    this.check = false;
+                }
+                if (this.result.size() <= size) {
+                    for (Node value : node.getChildren()) {
+                        if (value.getChildren().size() > 0) {
+                            getAllElements(value);
+                        }
+                        if (!result.contains(value.getValue())) {
+                            result.add((E) value.getValue());
+                        }
+                    }
+                }
+            }
 
             @Override
             public boolean hasNext() {
-                return it <= size;
+                return it < size;
             }
 
             @Override
             public E next() {
-                return result.get(it++).getValue();
+                getAllElements(basis);
+                return result.get(it++);
             }
         };
     }
