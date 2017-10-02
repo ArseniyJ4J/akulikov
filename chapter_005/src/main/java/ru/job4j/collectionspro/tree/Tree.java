@@ -114,6 +114,36 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     }
 
     /**
+     * Метод определяющий, является ли дерево бинарным.
+     * @return - возврат значения.
+     */
+    @Override
+    public boolean isBinary() {
+        return this.checkBinary(this.basis);
+    }
+
+    /**
+     * Метод определения бинарности с параметром. Что бы можно было реализовать рекурсию.
+     * @param node - корень от которого идет анализ.
+     * @return - возврат значения.
+     */
+    private boolean checkBinary(Node<E> node) {
+        boolean result = true;
+        if (node.getChildren().size() > 2) {
+            result = false;
+        }
+        if (result) {
+            for (Node<E> value : node.getChildren()) {
+                result = this.checkBinary(value);
+                if (!result) {
+                    break;
+                }
+            }
+        }
+        return result;
+    }
+
+    /**
      * Метод определения дубликата.
      * @param value - проверяемое значение.
      * @return - возврат значения. Возвращает true, если элемент Node с таким значением уже есть в дереве.

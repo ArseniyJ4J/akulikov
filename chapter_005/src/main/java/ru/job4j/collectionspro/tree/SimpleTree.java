@@ -17,4 +17,10 @@ public interface SimpleTree<E extends Comparable<E>> extends Iterable<E> {
      * @return - возврат значения.
      */
     boolean add(E parent, E child);
+
+    /**
+     * Метод определяющий, является ли дерево бинарным.
+     * @return - возврат значения.
+     */
+    boolean isBinary();
 }
