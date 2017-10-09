@@ -79,35 +79,20 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         Node<E> newChild = new Node<>(child);
         if (this.basis == null) {
             if (parent.compareTo(child) == 0) {
-//                System.out.println("Parent compare Child!!!!!!");
                 result = false;
             } else {
                 this.basis = newParent;
                 this.basis.getChildren().add(newChild);
-//                System.out.println("Root-parent added!");
-//                System.out.println("Check child: " + this.searchDuplicate(newChild));
                 result = true;
                 size += 2;
             }
         } else {
             Node<E> point = this.searchParent(newParent, this.basis);
-            int check = -1;
-            if (point != null) {
-                for (Node node : point.getChildren()) {
-                    check = newChild.getValue().compareTo((E) node.getValue());
-                    if (check == 0) {
-//                        System.out.println("Already have!!!");
-//                        System.out.println("Check child: " + this.searchDuplicate(newChild));
-                        break;
-                    }
-                }
-                if (check != 0 && !this.searchDuplicate(newChild)) {
-                    point.getChildren().add(newChild);
-//                    System.out.println("Less-parent added!!!");
-//                    System.out.println("Check child: " + this.searchDuplicate(newChild));
-                    result = true;
-                    size++;
-                }
+            Node<E> childPoint = this.searchParent(newChild, this.basis);
+            if (childPoint == null) {
+                point.getChildren().add(newChild);
+                result = true;
+                size++;
             }
         }
         return result;
@@ -149,9 +134,7 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
      * @return - возврат значения. Возвращает true, если элемент Node с таким значением уже есть в дереве.
      */
     private boolean searchDuplicate(Node value) {
-//        System.out.println("Duplicate search result: ===============");
         Node<E> result = this.searchParent(value, this.basis);
-//        System.out.println("====================");
         return result != null;
     }
 
@@ -164,7 +147,6 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     private Node<E> searchParent(Node<E> parent, Node<E> first) {
         Node<E> result = null;
         int check = first.getValue().compareTo(parent.getValue());
-//        System.out.println(check);
         if (check == 0) {
             result = first;
         } else {
@@ -186,11 +168,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     public Iterator<E> iterator() {
         return new Iterator<E>() {
 
-
             private List<E> result = new ArrayList<>();
             private int it = 0;
             private boolean check = true;
-
 
             private void getAllElements(Node<E> node) {
                 if (this.check) {
