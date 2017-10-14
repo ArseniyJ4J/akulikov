@@ -5,9 +5,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * SAXPars Class.
@@ -16,7 +14,38 @@ import java.util.Map;
  * @version 1.
  */
 public class SAXPars extends DefaultHandler {
-
+    /**
+     * Константа AddOrder. Ключ по которому определяется тэг операции добавления в xml файле.
+     */
+    private static final String ADD_ORDER = "AddOrder";
+    /**
+     * Константа DeleteOrder. Ключ по которому в xml файле определяется тэг операции удаления заявки.
+     */
+    private static final String DELETE_ORDER = "DeleteOrder";
+    /**
+     * Константа BUY. Ключ определяющий тип заявки как BUY.
+     */
+    private static final String BUY = "BUY";
+    /**
+     * Константа BOOK. Ключ определяющий атрибут book.
+     */
+    private static final String BOOK = "book";
+    /**
+     * Константа orderId. Ключ определяющий атрибут orderId.
+     */
+    private static final String ORDER_ID = "orderId";
+    /**
+     * Константа operation. Ключ определяющий атрибут operation.
+     */
+    private static final String OPERATION = "operation";
+    /**
+     * Константа price. Ключ определяющий атрибут price.
+     */
+    private static final String PRICE = "price";
+    /**
+     * Константа volume. Ключ определяющий атрибут volume.
+     */
+    private static final String VOLUME = "volume";
     /**
      * Поле класса startTime.
      */
@@ -41,19 +70,9 @@ public class SAXPars extends DefaultHandler {
     }
 
     /**
-     * Поле класса book.
-     */
-    private Map<Integer, OrderBook> book = new HashMap<>();
-
-    /**
      * Поле класса element.
      */
     private String element = "";
-
-    /**
-     * Поле класса att.
-     */
-    private Attributes att = null;
 
     /**
      * Метод проверки наличия, или (при необходимости) создания книги заявок.
@@ -87,19 +106,19 @@ public class SAXPars extends DefaultHandler {
     @Override
     public void startElement(String uri, String localName, String qName, Attributes attr) throws SAXException {
         this.element = qName;
-        if (element.equals("AddOrder")) {
-            int indexBook = this.checkBook(attr.getValue("book"));
-            int indexOrder = Integer.parseInt(attr.getValue("orderId"));
+        if (element.equals(ADD_ORDER)) {
+            int indexBook = this.checkBook(attr.getValue(BOOK));
+            int indexOrder = Integer.parseInt(attr.getValue(ORDER_ID));
             Order order = new Order(
-                    attr.getValue("operation").equals("BUY"),
-                    Double.parseDouble(attr.getValue("price")),
-                    Integer.parseInt(attr.getValue("volume"))
+                    attr.getValue(OPERATION).equals(BUY),
+                    Double.parseDouble(attr.getValue(PRICE)),
+                    Integer.parseInt(attr.getValue(VOLUME))
             );
             books.get(indexBook).add(indexOrder, order);
-        } else if (element.equals("DeleteOrder")) {
-            int indexBook = this.checkBook(attr.getValue("book"));
-            this.books.get(indexBook).getBuyContainer().remove(Integer.parseInt(attr.getValue("orderId")));
-            this.books.get(indexBook).getSellContainer().remove(Integer.parseInt(attr.getValue("orderId")));
+        } else if (element.equals(DELETE_ORDER)) {
+            int indexBook = this.checkBook(attr.getValue(BOOK));
+            this.books.get(indexBook).getBuyContainer().remove(Integer.parseInt(attr.getValue(ORDER_ID)));
+            this.books.get(indexBook).getSellContainer().remove(Integer.parseInt(attr.getValue(ORDER_ID)));
         }
     }
 

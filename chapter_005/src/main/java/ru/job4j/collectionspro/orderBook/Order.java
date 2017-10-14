@@ -31,14 +31,6 @@ public class Order implements Comparable<Order> {
     }
 
     /**
-     * Сеттер для поля класса type.
-     * @param type - новое значения type.
-     */
-    public void setType(boolean type) {
-        this.type = type;
-    }
-
-    /**
      * Геттер для поля класса price.
      * @return - возврат значения.
      */
