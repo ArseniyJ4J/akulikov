@@ -28,7 +28,7 @@ public class StringSub {
         int result = 0;
         for (int i = 0; i < buffer.length; i++) {
                 Character value = buffer[i];
-                result = result + value.hashCode();
+                result = result + (int)Math.pow(value.hashCode(), 2);
         }
         return result * buffer.length;
     }

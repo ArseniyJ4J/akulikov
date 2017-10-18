@@ -24,6 +24,18 @@ public class StringSubTest {
         assertThat(ss.compareString("kAs", "Aks"), is(true));
         assertThat(ss.compareString("kaa", "saa"), is(false));
         assertThat(ss.compareString("ask", "Ask"), is(false));
+        assertThat(ss.compareString("Xd", "Nn"), is(false));
+    }
 
+    /**
+     * Test.
+     */
+    @Test
+    public void test2() {
+        String symbols = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZабвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ0123456789";
+        for (int i = 0; i < symbols.length(); i++) {
+            Character value = symbols.charAt(i);
+            System.out.printf("Symbol: %s - %s HashCode.%n", value, value.hashCode());
+        }
     }
 }
