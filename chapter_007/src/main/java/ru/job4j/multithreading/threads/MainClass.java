@@ -8,18 +8,22 @@ package ru.job4j.multithreading.threads;
  */
 public class MainClass {
     /**
+     * Поле класса.
+     */
+    private static final String INPUT = " In this text  is   fourteen whitespaces, and nine words.  ";
+
+    /**
      * Метод mian.
      * @param args - параметр.
      */
     public static void main(String[] args) {
 
         TxtCalculator calc = new TxtCalculator();
-        String text = "In this text is eight whitespaces, and nine words.";
 
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int result = calc.whiteSpace(text);
+                int result = calc.whiteSpace(INPUT);
                 System.out.printf("White spaces: %s%n", result);
             }
         }).start();
@@ -27,7 +31,7 @@ public class MainClass {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                int result = calc.wordsNumber(text);
+                int result = calc.wordsNumber(INPUT);
                 System.out.printf("Words in text: %s%n", result);
             }
         }).start();
