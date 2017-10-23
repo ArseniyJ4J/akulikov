@@ -1,8 +1,5 @@
 package ru.job4j.multithreading.threads;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 /**
  * TxtCalculator Class.
  * @author Arseniy Kulikov.
@@ -17,12 +14,19 @@ public class TxtCalculator {
      * @return - возврат значения.
      */
     public int wordsNumber(String input) {
-        String regex = "\\S+";
         int result = 0;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        while (matcher.find()) {
-            result++;
+        int counter = 0;
+
+        for (int i = 0; i < input.length(); i++) {
+            if (counter == 1) {
+                result++;
+            }
+            Character ch = input.charAt(i);
+            if (!ch.equals(' ')) {
+                counter++;
+            } else {
+                counter = 0;
+            }
         }
         return result;
     }
@@ -33,12 +37,13 @@ public class TxtCalculator {
      * @return - возврат значения.
      */
     public int whiteSpace(String input) {
-        String regex = "\\s";
         int result = 0;
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(input);
-        while (matcher.find()) {
-            result++;
+
+        for (int i = 0; i < input.length(); i++) {
+            Character ch = input.charAt(i);
+            if (ch.equals(' ')) {
+                result++;
+            }
         }
         return result;
     }
