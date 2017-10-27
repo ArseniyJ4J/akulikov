@@ -1,7 +1,10 @@
 package ru.job4j.multithreading.threads.stop;
 
 /**
- * Created by Ирина on 27.10.2017.
+ * TimeStop Class.
+ * @author Arseniy Kulikov.
+ * @since 27.10.2017.
+ * @version 1.
  */
 public class TimeStop {
 
