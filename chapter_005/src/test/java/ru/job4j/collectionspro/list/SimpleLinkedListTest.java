@@ -18,9 +18,9 @@ public class SimpleLinkedListTest {
     @Test
     public void addAndGetTest() {
         SimpleLinkedList<String> sll = new SimpleLinkedList<>();
-        sll.add("123");
+        sll.add("monitore");
         String result = sll.get(0);
-        assertThat(result, is("123"));
+        assertThat(result, is("monitore"));
     }
 
     /**
