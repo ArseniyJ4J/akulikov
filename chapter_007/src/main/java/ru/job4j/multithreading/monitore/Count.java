@@ -25,6 +25,7 @@ public class Count {
         /**
          * Поле класса count.
          */
+        @GuardedBy("this")
         Count count;
 
         /**
@@ -45,7 +46,6 @@ public class Count {
      * Метод инкрементирования.
      * @param value - значение, на которое следует увеличить.
      */
-    @GuardedBy("this")
     void incremant(int value) {
         synchronized (this) {
             for (int i = 0; i < 1_00_000_000; i++) {
