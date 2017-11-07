@@ -1,7 +1,7 @@
 package ru.job4j.multithreading.waitnotify;
 
 /**
- * Customer Class.
+ * Producer Class.
  * @author Arseniy Kulikov.
  * @since 02.11.2017.
  * @version 1.
@@ -11,7 +11,7 @@ public class Customer implements Runnable {
     /**
      * Поле класса.
      */
-    private BlockingQueue bq;
+    private final BlockingQueue bq;
 
     /**
      * Конструктор.
@@ -23,13 +23,12 @@ public class Customer implements Runnable {
 
     @Override
     public void run() {
-        for (int i = 0; i < 20; i++) {
+        while (true) {
             try {
-                this.bq.put(i);
+                bq.take();
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        bq.setSomethingElse(false);
     }
 }

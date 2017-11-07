@@ -23,31 +23,10 @@ public class BlockingQueue<T> {
     private int limit = 0;
 
     /**
-     * Поле класса.
-     */
-    private boolean somethingElse = true;
-
-    /**
-     * Геттер для поля somethingElse.
-     * @return - возврат значения.
-     */
-    public boolean getSomethingElse() {
-        return somethingElse;
-    }
-
-    /**
-     * Сеттер для поля somethingElse.
-     * @param somethingElse - новое значение поля.
-     */
-    public void setSomethingElse(boolean somethingElse) {
-        this.somethingElse = somethingElse;
-    }
-
-    /**
      * Метод возращающий размер контейнера.
      * @return - возвра значения.
      */
-    public int size() {
+    public synchronized int size() {
         return queue.size();
     }
 
