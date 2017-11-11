@@ -53,7 +53,7 @@ public class ThreadPool {
     /**
      * Метод запускающий процесс завершения программы.
      */
-    public void finish() {
+    public synchronized void finish() {
         this.finish = false;
     }
 
