@@ -1,0 +1,210 @@
+--============================================================
+--Создаем базу данных:
+
+CREATE DATABASE user_item_db;
+
+--Заходим в созданную базу данных.
+
+\c user_item_db
+
+--============================================================
+--============================================================
+--============================================================
+
+
+CREATE TABLE rules (
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(15)
+);
+
+CREATE TABLE roles (
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(15)
+);
+
+CREATE TABLE roles_rules (
+    id_roles INT NOT NULL,
+    id_rules INT NOT NULL,
+    PRIMARY KEY (id_roles, id_rules),
+    FOREIGN KEY (id_roles) REFERENCES roles (id),
+    FOREIGN KEY (id_rules) REFERENCES rules (id)
+);
+
+CREATE TABLE users (
+    user_id SERIAL PRIMARY KEY,
+    name VARCHAR(20),
+    creation_date TIMESTAMP NOT NULL DEFAULT NOW(),
+    role_id INT NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES roles (id)
+);
+
+CREATE TABLE category_item (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30)
+);
+
+CREATE TABLE state_item (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(30)
+);
+
+CREATE TABLE items (
+    item_id SERIAL PRIMARY KEY,
+    description VARCHAR(32),
+    creation_date TIMESTAMP NOT NULL DEFAULT NOW(),
+    category_id INT NOT NULL,
+    state_id INT NOT NULL,
+    FOREIGN KEY (item_id) REFERENCES users (user_id),
+    FOREIGN KEY (category_id) REFERENCES category_item (id),
+    FOREIGN KEY (state_id) REFERENCES state_item (id)
+);
+
+CREATE TABLE comments (
+    id SERIAL PRIMARY KEY,
+    description VARCHAR(100),
+    item_id INT,
+    FOREIGN KEY (item_id) REFERENCES items (item_id)
+);
+
+CREATE TABLE attaches (
+    id SERIAL PRIMARY KEY,
+    file_name VARCHAR(30),
+    file_path VARCHAR(100),
+    item_id INT,
+    FOREIGN KEY (item_id) REFERENCES items (item_id)
+);
+
+--=====================================
+--Создание ролей:
+
+INSERT INTO roles (description) VALUES ('Admin');
+INSERT INTO roles (description) VALUES ('User');
+INSERT INTO roles (description) VALUES ('Programmer');
+
+--=====================================
+--Создание правил:
+
+INSERT INTO rules (description) VALUES ('format');
+INSERT INTO rules (description) VALUES ('coding');
+INSERT INTO rules (description) VALUES ('filework');
+INSERT INTO rules (description) VALUES ('print');
+INSERT INTO rules (description) VALUES ('coffeedrink');
+
+--=====================================
+--Более удачный дубликат предыдущего :
+
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'Admin'),
+				(SELECT id FROM rules WHERE description = 'format'));
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'Admin'),
+				(SELECT id FROM rules WHERE description = 'filework'));
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'Admin'),
+				(SELECT id FROM rules WHERE description = 'print'));
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'Admin'),
+				(SELECT id FROM rules WHERE description = 'coffeedrink'));
+
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'User'),
+				(SELECT id FROM rules WHERE description = 'filework'));
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'User'),
+				(SELECT id FROM rules WHERE description = 'print'));
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'User'),
+				(SELECT id FROM rules WHERE description = 'coffeedrink'));
+
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'Programmer'),
+				(SELECT id FROM rules WHERE description = 'coding'));
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'Programmer'),
+				(SELECT id FROM rules WHERE description = 'filework'));
+INSERT INTO roles_rules VALUES ((SELECT id FROM roles WHERE description = 'Programmer'),
+				(SELECT id FROM rules WHERE description = 'print'));
+--=====================================
+--Создание пользователей:
+
+INSERT INTO users (name, role_id) VALUES ('Sergey', (SELECT id FROM roles WHERE description = 'Admin'));
+INSERT INTO users (name, role_id) VALUES ('Ivan', (SELECT id FROM roles WHERE description = 'User'));
+INSERT INTO users (name, role_id) VALUES ('Basil', (SELECT id FROM roles WHERE description = 'User'));
+INSERT INTO users (name, role_id) VALUES ('Arseny', (SELECT id FROM roles WHERE description = 'Programmer'));
+
+--=====================================
+--Создание КАТЕГОРИЙ задач:
+
+INSERT INTO category_item (name) VALUES ('Important');
+INSERT INTO category_item (name) VALUES ('Unimportant');
+
+--=====================================
+--Создание СТАТУСОВ задач:
+
+INSERT INTO state_item (name) VALUES ('New');
+INSERT INTO state_item (name) VALUES ('In work');
+INSERT INTO state_item (name) VALUES ('Done');
+
+--=====================================
+--Создание задач:
+
+INSERT INTO items (item_id, description, category_id, state_id) VALUES (
+	(SELECT user_id FROM users WHERE name = 'Sergey'),
+	'format disc C',
+	(SELECT id FROM category_item WHERE name = 'Important'),
+	(SELECT id FROM state_item WHERE name = 'In work')
+);
+
+INSERT INTO items (item_id, description, category_id, state_id) VALUES (
+	(SELECT user_id FROM users WHERE name = 'Ivan'),
+	'Create a new document',
+	(SELECT id FROM category_item WHERE name = 'Unimportant'),
+	(SELECT id FROM state_item WHERE name = 'New')
+);
+
+INSERT INTO items (item_id, description, category_id, state_id) VALUES (
+	(SELECT user_id FROM users WHERE name = 'Basil'),
+	'make cofee',
+	(SELECT id FROM category_item WHERE name = 'Unimportant'),
+	(SELECT id FROM state_item WHERE name = 'Done')
+);
+
+INSERT INTO items (item_id, description, category_id, state_id) VALUES (
+	(SELECT user_id FROM users WHERE name = 'Arseny'),
+	'Create a programm',
+	(SELECT id FROM category_item WHERE name = 'Important'),
+	(SELECT id FROM state_item WHERE name = 'In work')
+);
+
+--=====================================
+--Создание комментариев:
+
+INSERT INTO comments (description, item_id) VALUES ('Be careful! Delete disc C, not D!',
+	(SELECT item_id FROM items WHERE description = 'format disc C'));
+
+INSERT INTO comments (description, item_id) VALUES ('Do not forget to make a backup!',
+	(SELECT item_id FROM items WHERE description = 'format disc C'));
+
+INSERT INTO comments (description, item_id) VALUES ('Just do it!',
+	(SELECT item_id FROM items WHERE description = 'Create a new document'));
+
+INSERT INTO comments (description, item_id) VALUES ('whith milk',
+	(SELECT item_id FROM items WHERE description = 'make cofee'));
+
+INSERT INTO comments (description, item_id) VALUES ('... and sugar',
+	(SELECT item_id FROM items WHERE description = 'make cofee'));
+
+INSERT INTO comments (description, item_id) VALUES ('You can find the task in the attached files. Call if that.',
+	(SELECT item_id FROM items WHERE description = 'Create a programm'));
+
+--=====================================
+--Создание списка прикрепляемых файлов:
+
+INSERT INTO attaches (file_name, file_path, item_id) VALUES (
+	'Specification.doc',
+	'C:\\Specification.doc',
+	(SELECT item_id FROM items WHERE description = 'Create a programm')
+);
+
+INSERT INTO attaches (file_name, file_path, item_id) VALUES (
+	'How_to_make_coffee.doc',
+	'C:\\How_to_make_coffee.doc',
+	(SELECT item_id FROM items WHERE description = 'make cofee')
+);
+
+INSERT INTO attaches (file_name, file_path, item_id) VALUES (
+	'Initial_data.rar',
+	'C:\\Initial_data.rar',
+	(SELECT item_id FROM items WHERE description = 'Create a programm')
+);
