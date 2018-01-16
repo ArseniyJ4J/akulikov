@@ -1,0 +1,88 @@
+CREATE DATABASE car_storage_db;
+
+\c car_storage_db
+
+CREATE TABLE transmission (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50)
+);
+
+CREATE TABLE motor (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50)
+);
+
+CREATE TABLE gearbox (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50)
+);
+
+CREATE TABLE cars (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(50),
+	trans_type_id INT NOT NULL,
+	motor_type_id INT NOT NULL,
+	gearbox_type_id INT NOT NULL,
+	FOREIGN KEY (trans_type_id) REFERENCES transmission(id),
+	FOREIGN KEY (motor_type_id) REFERENCES motor(id),
+	FOREIGN KEY (gearbox_type_id) REFERENCES gearbox(id)
+);
+
+INSERT INTO transmission (name) VALUES ('full drive');
+INSERT INTO transmission (name) VALUES ('back drive');
+INSERT INTO transmission (name) VALUES ('front drive');--
+INSERT INTO transmission (name) VALUES ('multi drive');--
+
+INSERT INTO motor (name) VALUES ('petrol');
+INSERT INTO motor (name) VALUES ('diesel');--
+INSERT INTO motor (name) VALUES ('hibrid');
+INSERT INTO motor (name) VALUES ('electro');--
+
+INSERT INTO gearbox (name) VALUES ('mechanical');
+INSERT INTO gearbox (name) VALUES ('automatic');
+INSERT INTO gearbox (name) VALUES ('variable');
+INSERT INTO gearbox (name) VALUES ('robotic');--
+
+INSERT INTO cars (name, trans_type_id, motor_type_id, gearbox_type_id) VALUES (
+	'Mitsubishi Pajero IO',
+	(SELECT id FROM transmission WHERE name = 'multi drive'),
+	(SELECT id FROM motor WHERE name = 'petrol'),
+	(SELECT id FROM gearbox WHERE name = 'automatic')
+);
+
+INSERT INTO cars (name, trans_type_id, motor_type_id, gearbox_type_id) VALUES (
+	'Toyota Corolla II',
+	(SELECT id FROM transmission WHERE name = 'front drive'),
+	(SELECT id FROM motor WHERE name = 'petrol'),
+	(SELECT id FROM gearbox WHERE name = 'mechanical')
+);
+
+INSERT INTO cars (name, trans_type_id, motor_type_id, gearbox_type_id) VALUES (
+	'Toyota Prius',
+	(SELECT id FROM transmission WHERE name = 'front drive'),
+	(SELECT id FROM motor WHERE name = 'hibrid'),
+	(SELECT id FROM gearbox WHERE name = 'variable')
+);
+--=========================================================================
+SELECT c.id, c.name AS Car_name, t.name AS Transmission_name, m.name AS Motor_type, g.name AS Gearbox_type FROM 
+	cars AS c, transmission AS t, motor AS m, gearbox AS g WHERE
+	c.trans_type_id = t.id
+	AND c.motor_type_id = m.id
+	AND c.gearbox_type_id = g.id;
+
+SELECT c.id, c.name AS Car_name, t.name AS Transmission_name, m.name AS Motor_type, g.name AS Gearbox_type
+FROM cars AS c JOIN transmission AS t ON (c.trans_type_id = t.id)
+		JOIN motor AS m ON (c.motor_type_id = m.id)
+		JOIN gearbox AS g ON (c.gearbox_type_id = g.id);
+
+SELECT t.name AS unused_transmission_name
+FROM cars AS c RIGHT OUTER JOIN transmission AS t ON c.trans_type_id = t.id
+WHERE c.name IS NULL;
+
+SELECT m.name AS unused_motor_type
+FROM cars AS c RIGHT OUTER JOIN motor AS m ON (c.motor_type_id = m.id)
+WHERE c.name IS NULL;
+
+SELECT g.name AS unused_gear_type
+FROM cars AS c RIGHT OUTER JOIN gearbox AS g ON (c.gearbox_type_id = g.id)
+WHERE c.name IS NULL;
