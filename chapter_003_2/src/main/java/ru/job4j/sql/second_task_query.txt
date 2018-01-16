@@ -1,0 +1,213 @@
+--==============================================
+CREATE DATABASE products_db;
+
+\c products_db
+
+CREATE TABLE type (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(40)
+);
+
+CREATE TABLE product (
+	id SERIAL PRIMARY KEY,
+	name VARCHAR(70) NOT NULL,
+	type_id INT NOT NULL,
+	expired_date DATE NOT NULL,
+	amount NUMERIC (6,3),
+	price NUMERIC (7, 2) NOT NULL,
+	FOREIGN KEY (type_id) REFERENCES type (id)
+);
+
+INSERT INTO type (name) VALUES ('СЫР');
+INSERT INTO type (name) VALUES ('МОЛОКО');
+INSERT INTO type (name) VALUES ('ПОЛУФАБРИКАТ');
+INSERT INTO type (name) VALUES ('ДЕЛИКАТЕС');
+INSERT INTO type (name) VALUES ('ОВОЩИ');
+INSERT INTO type (name) VALUES ('ФРУКТЫ');
+INSERT INTO type (name) VALUES ('ДЕСЕРТ');
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Российский',
+	(SELECT id FROM type WHERE name = 'СЫР'),
+	'02/07/2018',
+	10.350,
+	143.50
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Бри',
+	(SELECT id FROM type WHERE name = 'СЫР'),
+	'16/09/2018',
+	16.180,
+	899.90
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Масдам',
+	(SELECT id FROM type WHERE name = 'СЫР'),
+	'21/05/2018',
+	57.780,
+	480.30
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Простоквашино',
+	(SELECT id FROM type WHERE name = 'МОЛОКО'),
+	'12/02/2018',
+	120,
+	52
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Веселый молочник',
+	(SELECT id FROM type WHERE name = 'МОЛОКО'),
+	'18/02/2018',
+	74,
+	54
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Домик в деревне',
+	(SELECT id FROM type WHERE name = 'МОЛОКО'),
+	'02/02/2018',
+	8,
+	49
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Пельмени',
+	(SELECT id FROM type WHERE name = 'ПОЛУФАБРИКАТ'),
+	'15/03/2018',
+	58,
+	280
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Вареники',
+	(SELECT id FROM type WHERE name = 'ПОЛУФАБРИКАТ'),
+	'20/04/2018',
+	35,
+	160
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Котлеты',
+	(SELECT id FROM type WHERE name = 'ПОЛУФАБРИКАТ'),
+	'09/05/2018',
+	42.5,
+	220
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Креветки',
+	(SELECT id FROM type WHERE name = 'ДЕЛИКАТЕС'),
+	'18/02/2018',
+	5,
+	630
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Хамон',
+	(SELECT id FROM type WHERE name = 'ДЕЛИКАТЕС'),
+	'26/12/2021',
+	1.763,
+	2990
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Дефлопе с крутоном',
+	(SELECT id FROM type WHERE name = 'ДЕЛИКАТЕС'),
+	'15/01/2018',
+	1,
+	4000
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Картофель',
+	(SELECT id FROM type WHERE name = 'ОВОЩИ'),
+	'02/03/2018',
+	80,
+	32
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Морковь',
+	(SELECT id FROM type WHERE name = 'ОВОЩИ'),
+	'18/02/2018',
+	60,
+	25
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Лук',
+	(SELECT id FROM type WHERE name = 'ОВОЩИ'),
+	'15/02/2018',
+	40,
+	42
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Апельсин',
+	(SELECT id FROM type WHERE name = 'ФРУКТЫ'),
+	'28/02/2018',
+	50,
+	120
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Лимон',
+	(SELECT id FROM type WHERE name = 'ФРУКТЫ'),
+	'12/03/2018',
+	20,
+	180
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Ананас',
+	(SELECT id FROM type WHERE name = 'ФРУКТЫ'),
+	'18/02/2018',
+	15,
+	210
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Клубничное мороженное',
+	(SELECT id FROM type WHERE name = 'ДЕСЕРТ'),
+	'12/02/2018',
+	35,
+	16
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Ванильное мороженное',
+	(SELECT id FROM type WHERE name = 'ДЕСЕРТ'),
+	'07/02/2018',
+	21,
+	25
+);
+
+INSERT INTO product (name, type_id, expired_date, amount, price) VALUES (
+	'Торт Венский',
+	(SELECT id FROM type WHERE name = 'ДЕСЕРТ'),
+	'10/02/2018',
+	7,
+	310
+);
+
+--=============================================================
+
+SELECT * FROM product  WHERE type_id = (SELECT id FROM type WHERE name = 'СЫР');
+
+SELECT * FROM product WHERE name LIKE '%мороженное%';
+
+SELECT * FROM product WHERE expired_date BETWEEN '01/02/2018' AND '28/02/2018';
+
+SELECT * FROM product WHERE price = (SELECT MAX(price) FROM product);
+
+SELECT SUM(amount) FROM product WHERE type_id = (SELECT id FROM type WHERE name = 'ОВОЩИ');
+
+SELECT * FROM product WHERE type_id = (SELECT id FROM type WHERE name = 'СЫР') OR type_id = (SELECT id FROM type WHERE name = 'МОЛОКО');
+
+--Здесь должен быть запрос по пункту 7, но я не понял как его сделать.
+
+SELECT * FROM product AS p INNER JOIN type AS t ON p.type_id = t.id;
