@@ -8,7 +8,9 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Arseniy Kulkiov
  */
 public class BomberManTest {
-
+    /**
+     * Test.
+     */
     @Test
     public void moveTest() {
         BomberMan bm = new BomberMan(5, 5, 10, 10);
@@ -19,7 +21,9 @@ public class BomberManTest {
             }
         }
     }
-
+    /**
+     * Test.
+     */
     @Test
     public void moveTest2() {
         ReentrantLock[][] rl = new ReentrantLock[10][10];
@@ -31,7 +35,9 @@ public class BomberManTest {
             }
         }
     }
-
+    /**
+     * Test.
+     */
     @Test
     public void test() {
         ReentrantLock[][] rl = new ReentrantLock[10][10];
@@ -40,5 +46,4 @@ public class BomberManTest {
         thread1.start();
 //        thread2.start();
     }
-
 }

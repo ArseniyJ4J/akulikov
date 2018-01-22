@@ -6,14 +6,15 @@ import java.util.concurrent.locks.ReentrantLock;
  * @author Arseniy Kulkiov
  */
 public class StartUI {
-
-
-
+    /**
+     * Main method.
+     * @param args - comand line parametres.
+     */
     public static void main(String[] args) {
         ReentrantLock[][] rl;
         rl = initialBoard(10);
-        BomberManSecond bm = new BomberManSecond(5,5, rl);
-        BomberManSecond bm2 = new BomberManSecond(5,6, rl);
+        BomberManSecond bm = new BomberManSecond(5, 5, rl);
+        BomberManSecond bm2 = new BomberManSecond(5, 6, rl);
         Thread thread1 = new Thread(bm);
         Thread thread2 = new Thread(bm2);
         thread1.start();
@@ -39,6 +40,11 @@ public class StartUI {
 ////        }
     }
 
+    /**
+     * Initial board method.
+     * @param size - board's size.
+     * @return - return statement.
+     */
     private static ReentrantLock[][] initialBoard(int size) {
         ReentrantLock[][] rl = new ReentrantLock[size][size];
         for (int i = 0; i < size; i++) {
