@@ -226,5 +226,22 @@ FROM type AS t, product AS p
 GROUP BY t.name
 HAVING SUM(p.amount) < 10;
 
+SELECT t.name
+FROM type AS t, product AS p
+GROUP BY p.type_id
+HAVING SUM(p.amount) < 10;
+
+SELECT t.name
+FROM type AS t,
+
+SELECT t.name, SUM(p.amount)
+FROM type AS t, product AS p
+GROUP BY t.name
+HAVING SUM(p.amount) < 10;
+
+SELECT type.name
+FROM type
+WHERE type.id=product.type_id;
+
 
 SELECT * FROM product AS p INNER JOIN type AS t ON p.type_id = t.id;
