@@ -208,40 +208,15 @@ SELECT SUM(amount) FROM product WHERE type_id = (SELECT id FROM type WHERE name 
 
 SELECT * FROM product WHERE type_id = (SELECT id FROM type WHERE name = 'СЫР') OR type_id = (SELECT id FROM type WHERE name = 'МОЛОКО');
 
---Здесь должен быть запрос по пункту 7, но я не понял как его сделать.
-
-SELECT Singer, SUM(Sale)
-FROM Artists
-GROUP BY Singer
-HAVING SUM(Sale) > 2000000
-
 7. Написать запрос, который выводит тип продуктов, которых осталось меньше 10 штук.
 
-SELECT * FROM product;
-SELECT * FROM type;
-
-
-SELECT t.name, SUM(p.amount)
-FROM type AS t, product AS p
-GROUP BY t.name
-HAVING SUM(p.amount) < 10;
-
 SELECT t.name
-FROM type AS t, product AS p
-GROUP BY p.type_id
-HAVING SUM(p.amount) < 10;
-
-SELECT t.name
-FROM type AS t,
-
-SELECT t.name, SUM(p.amount)
-FROM type AS t, product AS p
-GROUP BY t.name
-HAVING SUM(p.amount) < 10;
-
-SELECT type.name
-FROM type
-WHERE type.id=product.type_id;
-
+FROM type AS t
+GROUP BY t.id
+HAVING t.id = (
+				SELECT p.type_id FROM product AS p
+				GROUP BY p.type_id
+				HAVING SUM(amount) < 10
+);
 
 SELECT * FROM product AS p INNER JOIN type AS t ON p.type_id = t.id;
