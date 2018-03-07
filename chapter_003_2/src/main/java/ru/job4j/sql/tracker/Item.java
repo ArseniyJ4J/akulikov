@@ -22,7 +22,7 @@ public class Item {
     /**
      * id - идентификационный номер.
      */
-    private String id;
+    private String id = Integer.toString(0);
 
     @Override
     public boolean equals(Object o) {
@@ -68,6 +68,7 @@ public class Item {
     public Item(String name, String desc) {
         this.name = name;
         this.desc = desc;
+        this.setId(String.valueOf(Integer.parseInt(this.getId()) + 1));
     }
     /**
      * Конструктор.
@@ -80,6 +81,20 @@ public class Item {
         this.desc = desc;
         this.id = id;
     }
+    /**
+     * Конструктор.
+     * @param name - имя заявки.
+     * @param desc - описание заявки.
+     * @param comments - комментарии.
+     * @param id - идентификационный номер заявки.
+     */
+    public Item(String name, String desc, String[] comments, String id) {
+        this.id = id;
+        this.name = name;
+        this.desc = desc;
+        this.comments = comments;
+    }
+
     /**
      * Метод геттер.
      * @return - возврат значения.
@@ -133,7 +148,7 @@ public class Item {
      * Метод сеттер.
      * @param created - дата создания заявки.
      */
-    public void setDesc(long created) {
+    public void setCreated(long created) {
         this.created = created;
     }
     /**
@@ -147,7 +162,7 @@ public class Item {
      * Метод сеттер.
      * @param comments - комментарии к заявкам.
      */
-    public void setDesc(String[] comments) {
+    public void setComments(String[] comments) {
         this.comments = comments;
     }
 }
