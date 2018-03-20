@@ -8,8 +8,11 @@ import java.sql.*;
  * @since 19.03.2017
  * @version 1
  */
-public class UserStore {
-
+public enum  UserStore {
+    /**
+     * Field Class.
+     */
+    INSTANCE;
     /**
      * Field Class.
      */
@@ -17,51 +20,33 @@ public class UserStore {
     /**
      * Field Class.
      */
-    private String url = "jdbc:postgresql://localhost:5432/";
+    private Connection connection;
     /**
      * Field Class.
      */
-    private String name = "postgres";
+    private PreparedStatement ps;
     /**
      * Field Class.
      */
-    private String password = "password";
-    /**
-     * Field Class.
-     */
-    private Connection connection = null;
-    /**
-     * Field Class.
-     */
-    private static volatile UserStore instance = new UserStore();
-    /**
-     * Field Class.
-     */
-    private static Object mutex = new Object();
+    private ResultSet rs;
+
     /**
      * Constructor.
      */
-    private UserStore() {
+    UserStore() {
         this.init();
     }
-
     /**
      * getInstance method.
      * @return - return statement.
      */
     public static UserStore getInstance() {
-        UserStore result = instance;
-        if (result == null) {
-            synchronized (mutex) {
-                result = instance;
-                }
-            }
-        return result;
+        return INSTANCE;
     }
-
     /**
      * init method.
      */
+
     private void init() {
         try {
             Class.forName("org.postgresql.Driver");
@@ -88,15 +73,15 @@ public class UserStore {
     //POST Method.
     public boolean createUser(User user) {
         boolean result = false;
-        try {
-            PreparedStatement ps = instance.connection.prepareStatement("INSERT INTO users (name, login, email, date_creation) VALUES (?, ?, ?, ?)");
+        try (PreparedStatement prs = this.ps) {
+            ps = INSTANCE.connection.prepareStatement("INSERT INTO users (name, login, email, date_creation) VALUES (?, ?, ?, ?)");
             ps.setString(1, user.getName());
             ps.setString(2, user.getLogin());
             ps.setString(3, user.getEmail());
             ps.setString(4, user.getCreateDate());
             ps.execute();
             connection.commit();
-            ps.close();
+//            ps.close();
             result = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -112,15 +97,15 @@ public class UserStore {
     //PUT Method.
     public boolean updateUser(User user) {
         boolean result = false;
-        try {
-            PreparedStatement ps = instance.connection.prepareStatement("UPDATE users SET name=(?), email=(?), date_creation=(?) WHERE login=(?);");
+        try (PreparedStatement prs = this.ps) {
+            ps = INSTANCE.connection.prepareStatement("UPDATE users SET name=(?), email=(?), date_creation=(?) WHERE login=(?);");
             ps.setString(1, user.getName());
             ps.setString(2, user.getEmail());
             ps.setString(3, user.getCreateDate());
             ps.setString(4, user.getLogin());
             ps.execute();
             connection.commit();
-            ps.close();
+//            ps.close();
             result = true;
         } catch (SQLException e) {
             e.printStackTrace();
@@ -136,10 +121,10 @@ public class UserStore {
     //GET Method.
     public User getUser(String login) {
         User user = null;
-        try {
-            PreparedStatement ps = connection.prepareStatement("SELECT name, login, email, date_creation FROM users WHERE login=(?);");
+        try (PreparedStatement prs = this.ps; ResultSet rst = this.rs) {
+            ps = connection.prepareStatement("SELECT name, login, email, date_creation FROM users WHERE login=(?);");
             ps.setString(1, login);
-            ResultSet rs = ps.executeQuery();
+            rs = ps.executeQuery();
             if (rs.isBeforeFirst()) {
                 rs.next();
                 user = new User(rs.getString(1), rs.getString(2), rs.getString(3));
@@ -158,12 +143,12 @@ public class UserStore {
      */
     //DELETE Method.
     public void deleteUser(String login) {
-        try {
-            PreparedStatement ps = connection.prepareStatement("DELETE FROM users WHERE login=(?)");
+        try (PreparedStatement prs = this.ps) {
+            ps = connection.prepareStatement("DELETE FROM users WHERE login=(?)");
             ps.setString(1, login);
             ps.execute();
             connection.commit();
-            ps.close();
+//            ps.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
