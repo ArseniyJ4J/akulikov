@@ -153,4 +153,19 @@ public enum  UserStore {
             e.printStackTrace();
         }
     }
+
+    /**
+     * allUsers Method.
+     * @return - return statement.
+     */
+    public ResultSet allUsers() {
+        ResultSet rs = null;
+        try {
+            rs = connection.createStatement().executeQuery("SELECT * FROM users;");
+            connection.commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
 }
