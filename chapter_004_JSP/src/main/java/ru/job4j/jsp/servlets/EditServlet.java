@@ -1,6 +1,8 @@
 package ru.job4j.jsp.servlets;
 
 import ru.job4j.jsp.crud.User;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,10 +19,8 @@ public class EditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String name = req.getParameter("name");
-        String login = req.getParameter("login");
-        String email = req.getParameter("email");
-        resp.sendRedirect(String.format("%s/pages/edit.jsp?name=%s&login=%s&email=%s", req.getContextPath(), name, login, email));
+        RequestDispatcher rd = req.getRequestDispatcher("/pages/edit.jsp");
+        rd.forward(req, resp);
     }
 
     @Override
@@ -33,6 +33,7 @@ public class EditServlet extends HttpServlet {
         MenuServlet.USER_STORE.deleteUser(oldLogin);
         User user = new User(name, login, email);
         MenuServlet.USER_STORE.createUser(user);
-        resp.sendRedirect(String.format("%s/pages/editComplete.jsp?name=%s&login=%s&email=%s", req.getContextPath(), name, login, email));
+        RequestDispatcher rd = req.getRequestDispatcher("/pages/editComplete.jsp");
+        rd.forward(req, resp);
     }
 }

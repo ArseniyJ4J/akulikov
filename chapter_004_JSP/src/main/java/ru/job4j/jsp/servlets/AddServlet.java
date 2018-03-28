@@ -1,6 +1,8 @@
 package ru.job4j.jsp.servlets;
 
 import ru.job4j.jsp.crud.User;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -27,6 +29,7 @@ public class AddServlet extends HttpServlet {
         User user = new User(name, login, email);
         System.out.println(user.toString());
         MenuServlet.USER_STORE.createUser(user);
-        resp.sendRedirect(String.format("%s/pages/addComplete.jsp?name=%s&login=%s&email=%s", req.getContextPath(), name, login, email));
+        RequestDispatcher rd = req.getRequestDispatcher("/pages/addComplete.jsp");
+        rd.forward(req, resp);
     }
 }

@@ -1,11 +1,11 @@
 package ru.job4j.jsp.servlets;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /** Class DeleteServlet.
  * @author Arseniy Kulkiov
@@ -22,10 +22,9 @@ public class DeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        String name = req.getParameter("name");
         String login = req.getParameter("login");
-        String email = req.getParameter("email");
         MenuServlet.USER_STORE.deleteUser(login);
-        resp.sendRedirect(String.format("%s/pages/delete.jsp?name=%s&login=%s&email=%s", req.getContextPath(), name, login, email));
+        RequestDispatcher rd = req.getRequestDispatcher("/pages/delete.jsp");
+        rd.forward(req, resp);
     }
 }
