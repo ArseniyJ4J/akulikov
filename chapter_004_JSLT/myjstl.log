@@ -1,0 +1,2 @@
+23:09:19,204  INFO main UserStore:createUser:87 - User create: name: 1239, login: 1239, email: 1239,  createDate: 2018-03-29 23:09:19.195
+23:09:19,211  INFO main UserStore:createUser:87 - User create: name: 123678, login: 123678, email: 123678,  createDate: 2018-03-29 23:09:19.195
