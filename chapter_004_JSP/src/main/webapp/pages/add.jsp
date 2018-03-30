@@ -11,7 +11,7 @@
     <p>Name : <input required maxlength='20' type='text' name='name'></p>
     <p>Login : <input required maxlength='15' type='text' name='login'></p>
     <p>Email : <input required maxlength='30' type='text' name='email'></p>
-    <p><input type='submit' value='!Add new User'></p>
+    <p><input type='submit' value='Add new User'></p>
 </form>
 
 </body>
