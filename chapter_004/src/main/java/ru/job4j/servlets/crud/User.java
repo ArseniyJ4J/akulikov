@@ -96,6 +96,20 @@ public class User {
         this.createDate = new Timestamp(System.currentTimeMillis()).toString();
     }
 
+    /**
+     * Constructor.
+     * @param name - parameter.
+     * @param login - parameter.
+     * @param email - parameter.
+     * @param createDate - create Date.
+     */
+    public User(String name, String login, String email, String createDate) {
+        this.name = name;
+        this.login = login;
+        this.email = email;
+        this.createDate = createDate;
+    }
+
     @Override
     public String toString() {
         return String.format("name: %s, login: %s, email: %s,  createDate: %s", this.name, this.login, this.email, this.createDate);

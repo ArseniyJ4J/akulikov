@@ -1,5 +1,6 @@
 package ru.job4j.servlets.servlethtml;
 
+import ru.job4j.servlets.crud.User;
 import ru.job4j.servlets.crud.UserStore;
 
 import javax.servlet.ServletException;
@@ -30,7 +31,7 @@ public class MenuServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException {
-        ResultSet rs = USER_STORE.allUsers();
+        List<User> list = USER_STORE.allUsers();
         resp.setContentType("text/html");
         PrintWriter writer = null;
         StringBuilder sb = new StringBuilder("<table border='1'>");
@@ -42,11 +43,11 @@ public class MenuServlet extends HttpServlet {
                     + "<th>Email:</th>"
                     + "<th>Date creation:</th>"
                     + "<tr>");
-            while (rs.next()) {
-                String name = rs.getString("name");
-                String login = rs.getString("login");
-                String email = rs.getString("email");
-                String date = rs.getString("date_creation");
+            for (User user : list) {
+                String name = user.getName();
+                String login = user.getLogin();
+                String email = user.getEmail();
+                String date = user.getCreateDate();
                 sb.append("<tr>"
                         + "<td>" + name + "</td>"
                         + "<td>" + login + "</td>"
@@ -71,7 +72,7 @@ public class MenuServlet extends HttpServlet {
                         + "</tr>");
             }
             sb.append("</table>");
-        } catch (IOException | SQLException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
